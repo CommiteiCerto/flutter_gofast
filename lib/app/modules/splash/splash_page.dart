@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gofast/app/app_controller.dart';
-import 'package:flutter_gofast/app/core/intercionalization/app_translate.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashPage extends StatelessWidget {
