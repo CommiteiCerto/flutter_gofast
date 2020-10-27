@@ -28,7 +28,7 @@ mixin _$AppController on _AppControllerBase, Store {
       AsyncAction('_AppControllerBase.loadThemeData');
 
   @override
-  Future loadThemeData() {
+  Future<void> loadThemeData() {
     return _$loadThemeDataAsyncAction.run(() => super.loadThemeData());
   }
 
@@ -36,7 +36,7 @@ mixin _$AppController on _AppControllerBase, Store {
       AsyncAction('_AppControllerBase.setThemeData');
 
   @override
-  Future setThemeData(ThemeMode themeMode, {bool saveShared = true}) {
+  Future<void> setThemeData(ThemeMode themeMode, {bool saveShared = true}) {
     return _$setThemeDataAsyncAction
         .run(() => super.setThemeData(themeMode, saveShared: saveShared));
   }

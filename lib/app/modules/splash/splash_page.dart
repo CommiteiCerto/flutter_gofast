@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gofast/app/app_controller.dart';
-import 'package:flutter_gofast/app/core/enuns/app_enums.dart';
-import 'package:flutter_gofast/app/core/interfaces/auth_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../app_controller.dart';
+import '../../core/enuns/app_enums.dart';
+import '../../core/interfaces/auth_repository.dart';
 
 class SplashPage extends StatelessWidget {
   @override
@@ -30,7 +30,7 @@ class SplashPage extends StatelessWidget {
                 await Modular.get<IAuthRepository>()
                     .doLoginGoogle()
                     .then((result) {
-                  if (result.status == ResponseStatus.Success) {
+                  if (result.status == ResponseStatus.rsSuccess) {
                     print(result.message);
                   } else {
                     print(result.message);

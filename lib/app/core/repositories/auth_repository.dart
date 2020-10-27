@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_gofast/app/core/features/responses/response_builder.dart';
-import 'package:flutter_gofast/app/core/features/responses/response_defult.dart';
-import 'package:flutter_gofast/app/core/interfaces/auth_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../core/features/responses/response_builder.dart';
+import '../../core/features/responses/response_defult.dart';
+import '../../core/interfaces/auth_repository.dart';
 
 class AuthRepository implements IAuthRepository {
   final FirebaseAuth firebaseAuth;
@@ -17,7 +17,7 @@ class AuthRepository implements IAuthRepository {
 
       return ResponseBuilder.success<FirebaseUser>(
           object: await firebaseAuth.currentUser());
-    } catch (e) {
+    } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
   }
@@ -25,18 +25,17 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<DefaultResponse> doLoginGoogle() async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final googleSignIn = GoogleSignIn();
 
-      final GoogleSignInAccount googleSignInAccount =
-          await googleSignIn.signIn();
+      final googleSignInAccount = await googleSignIn.signIn();
 
-      final GoogleSignInAuthentication googleSignInAuthentication =
+      final googleSignInAuthentication =
           await googleSignInAccount.authentication;
 
       FirebaseUser firebaseUser;
 
       if (googleSignInAuthentication.accessToken != null) {
-        final AuthCredential credential = GoogleAuthProvider.getCredential(
+        final credential = GoogleAuthProvider.getCredential(
             idToken: googleSignInAuthentication.idToken,
             accessToken: googleSignInAuthentication.accessToken);
 
@@ -46,9 +45,9 @@ class AuthRepository implements IAuthRepository {
       }
       return ResponseBuilder.success<FirebaseUser>(
           object: firebaseUser, message: 'Logou com sucesso');
-    } catch (e) {
+    } on Exception catch (e) {
       return ResponseBuilder.failed(
-          object: e, message: 'Falha ao Logar com Google. e' + e.toString());
+          object: e, message: 'Falha ao Logar com Google. e$e');
     }
   }
 
@@ -57,7 +56,7 @@ class AuthRepository implements IAuthRepository {
     try {
       return ResponseBuilder.success<FirebaseUser>(
           object: await firebaseAuth.currentUser());
-    } catch (e) {
+    } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
   }
@@ -67,7 +66,7 @@ class AuthRepository implements IAuthRepository {
     try {
       await firebaseAuth.signOut();
       return ResponseBuilder.success();
-    } catch (e) {
+    } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
   }
@@ -82,7 +81,7 @@ class AuthRepository implements IAuthRepository {
           .then((auth) {
         return ResponseBuilder.success<FirebaseUser>(object: auth.user);
       });
-    } catch (e) {
+    } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
   }

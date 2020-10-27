@@ -1,4 +1,4 @@
-import 'package:flutter_gofast/app/core/enuns/app_enums.dart';
+import '../../../core/enuns/app_enums.dart';
 
 class DefaultResponse<T> {
   final T object;

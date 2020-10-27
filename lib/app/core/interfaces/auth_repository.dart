@@ -1,4 +1,4 @@
-import 'package:flutter_gofast/app/core/features/responses/response_builder.dart';
+import '../../core/features/responses/response_builder.dart';
 
 abstract class IAuthRepository {
   Future<DefaultResponse> doLoginGoogle();
