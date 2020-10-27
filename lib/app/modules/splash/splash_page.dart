@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gofast/app/app_controller.dart';
+import 'package:flutter_gofast/app/core/enuns/app_enums.dart';
+import 'package:flutter_gofast/app/core/interfaces/auth_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashPage extends StatelessWidget {
@@ -22,6 +24,20 @@ class SplashPage extends StatelessWidget {
                 Modular.get<AppController>().setThemeData(ThemeMode.light);
               },
             ),
+            RaisedButton(
+              child: Text('Login Google'),
+              onPressed: () async {
+                await Modular.get<IAuthRepository>()
+                    .doLoginGoogle()
+                    .then((result) {
+                  if (result.status == ResponseStatus.Success) {
+                    print(result.message);
+                  } else {
+                    print(result.message);
+                  }
+                });
+              },
+            )
           ],
         ),
       ),
